@@ -1,0 +1,10 @@
+{
+  "buildCommand": "mkdir -p public && cp -R frontend/. public/",
+  "outputDirectory": "public",
+  "framework": null,
+  "rewrites": [
+    { "source": "/pages/adventures", "destination": "/pages/adventures/index.html" },
+    { "source": "/pages/adventures/detail", "destination": "/pages/adventures/detail/index.html" },
+    { "source": "/pages/adventures/reservations", "destination": "/pages/adventures/reservations/index.html" }
+  ]
+}

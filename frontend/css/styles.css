@@ -1,0 +1,599 @@
+:root {
+  --primary: #ff8500;
+  --primary-hover: #ea7200;
+  --primary-glow: rgba(255, 133, 0, 0.35);
+  --dark: #0f172a;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --card-radius: 16px;
+  --transition-smooth: 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-y: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  outline: none;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* ============================
+   Navigation Bar
+   ============================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  padding: 12px 24px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ff8500 0%, #ff5500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.04);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #475569 !important;
+  margin-right: 24px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-item.active .nav-link {
+  color: var(--primary) !important;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-item.active .nav-link::after {
+  width: 100%;
+}
+
+/* ============================
+   Hero Section with 3D Depth
+   ============================ */
+.hero-image {
+  background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0.75) 100%),
+    url("https://images.pexels.com/photos/2422461/pexels-photo-2422461.jpeg?cs=srgb&dl=pexels-josh-hild-2422461.jpg&fm=jpg");
+  height: 52vh;
+  min-height: 380px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.hero-image .container {
+  transform-style: preserve-3d;
+  animation: heroFloat3D 6s ease-in-out infinite alternate;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+}
+
+@keyframes heroFloat3D {
+  0% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotateX(2deg);
+  }
+}
+
+.hero-image h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  margin-bottom: 12px;
+}
+
+.hero-subheading {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 650px;
+  margin: 0 auto 28px auto;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-input {
+  width: 100%;
+  max-width: 580px;
+  height: 54px;
+  padding: 0 24px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: var(--dark);
+  font-size: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-input:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 12px 35px var(--primary-glow);
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* ============================
+   Content & 3D Interactive Tiles
+   ============================ */
+.content {
+  padding: 50px 0px 80px 0px;
+  flex: 1;
+}
+
+/* Card perspective container & grid spacing */
+#data {
+  perspective: 1200px;
+  row-gap: 32px !important;
+}
+
+#data > [class*="col-"] {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  margin-bottom: 24px !important;
+}
+
+/* City Tile (Landing Page) */
+.tile {
+  position: relative;
+  height: 340px;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* 3D Transform Properties */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  background: #1e293b;
+}
+
+/* Subtle CSS hover lift when JS 3D tilt is idle */
+.tile:hover {
+  box-shadow: 0 22px 40px -10px rgba(0, 0, 0, 0.35), 0 12px 16px -8px rgba(0, 0, 0, 0.2);
+}
+
+/* Background image in 3D card */
+.tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  transform: translateZ(0);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s ease;
+}
+
+.tile:hover img {
+  filter: brightness(85%);
+  transform: scale(1.08) translateZ(0);
+}
+
+/* Gradient overlay scrim for crisp typography */
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.9) 0%,
+    rgba(15, 23, 42, 0.5) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3D floating text layer */
+.tile-text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  transform: translateZ(36px);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.tile-text h5 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.tile-text p {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Card dynamic specular glare */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+}
+
+/* ============================
+   Activity Card (Adventures Page)
+   ============================ */
+div.activity-card {
+  color: var(--text-main);
+  position: relative;
+  height: 380px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+
+  /* 3D Properties */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+}
+
+div.activity-card:hover {
+  box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.16);
+}
+
+/* Image inside adventure card */
+div.activity-card > img,
+.activity-card img {
+  width: 100% !important;
+  height: 270px !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: var(--card-radius) var(--card-radius) 0 0 !important;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateZ(0);
+}
+
+div.activity-card:hover > img,
+.activity-card:hover img {
+  transform: scale(1.06) translateZ(0);
+}
+
+/* Card body at bottom */
+div.activity-card .card-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  flex: 0 0 auto !important;
+  padding: 14px 16px;
+  background: #ffffff !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+}
+
+div.activity-card .card-body h6 {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+div.activity-card .card-body p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+/* 3D Elevated Category Banner */
+.category-banner {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  padding: 6px 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff8500 0%, #ff5500 100%);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 16px var(--primary-glow);
+  transform: translateZ(38px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+/* ============================
+   Filter Bar & Category Pills
+   ============================ */
+.filter-bar {
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 0px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.filter-bar-tile {
+  border-right: 1px solid #e2e8f0;
+  padding: 0px 20px;
+}
+
+.filter-bar-tile select {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 6px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.filter-bar-tile select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.category-filter {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--primary);
+  background: rgba(255, 133, 0, 0.08);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 6px 16px;
+  margin: 6px 8px 6px 0px;
+  transition: all 0.2s ease;
+}
+
+.category-filter:hover {
+  background: rgba(255, 133, 0, 0.16);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   Adventure Detail & Reservation
+   ============================ */
+.adventure-detail-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.05);
+}
+
+.activity-card-image {
+  height: 480px;
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.activity-card-image:hover {
+  transform: scale(1.02);
+  filter: brightness(90%);
+}
+
+#reservation-panel-available,
+#reservation-panel-sold-out {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.05);
+}
+
+#reservation-panel-available .form-control {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+#reservation-panel-available .form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* 3D Elevated Buttons */
+.reserve-button,
+.reservation-visit-button {
+  border: none;
+  background: linear-gradient(135deg, #ff8500 0%, #ff5500 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reserve-button {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+}
+
+.reserve-button:hover,
+.reservation-visit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 85, 0, 0.45);
+}
+
+.reserve-button:active,
+.reservation-visit-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+/* ============================
+   Tables & Reservations
+   ============================ */
+.table {
+  background: #ffffff;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.table thead th {
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 14px 16px;
+}
+
+.table tbody td {
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* ============================
+   Footer
+   ============================ */
+footer {
+  background: #ffffff;
+  width: 100%;
+  padding: 24px 0px;
+  color: #94a3b8;
+  font-size: 14px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: auto;
+}
+
+/* ============================
+   Entrance Animations
+   ============================ */
+.fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
