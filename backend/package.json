@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "node build.js",
     "start": "node server.js"
   },
   "keywords": [],
